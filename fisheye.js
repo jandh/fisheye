@@ -8,9 +8,10 @@
  * <ul class="jh_fisheye" id="myFisheye">
  *  <li>
  * 		<label>
+ *          MyItemName
  * 		</label>
  *      <a>
- *          <img icon_src_big="<pathToMaxSizeIcon>" icon_src_small="<pathToMinSizeIcon>"/>
+ *          <img icon_src_big="<pathToMaxSizeIcon>" icon_src_small="<pathToMinSizeIcon>" />
  *      <a>
  *  </li>
  * ...
@@ -18,7 +19,7 @@
  * 
  * Javascript-Example:
  * <script>
- * 	var myFisheye = new JH_Fisheye(document.getElementById('myFisheye'));
+ * 	    var myFisheye = new JH_Fisheye(document.getElementById('myFisheye'));
  * </script>
  * 
  */
@@ -398,6 +399,9 @@ JH_Fisheye.prototype.getActiveItemId = function(){
         if(this.menuItemIcons[i].getAttribute('active') === 'true'){
             return this.menuItemIcons[i].id;
         }
+    }
+    if(getCookie(JH_Fisheye_Statics.COOKIE_KEY_ACTIVE + "_" + this.rootUL.id)){
+        return getCookie(JH_Fisheye_Statics.COOKIE_KEY_ACTIVE + "_" + this.rootUL.id);
     }
     return null;
 }
