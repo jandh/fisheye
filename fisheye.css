@@ -1,0 +1,29 @@
+.jh_fisheye_menu{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.jh_fisheye_menu_vertical > li{
+	display: block;
+	text-align: left;
+}
+
+.jh_fisheye_menu_horizontal > li{
+	display: inline-block;
+	text-align: center;
+	margin: 0;
+	padding: 0;	
+}
+
+.jh_fisheye_menu > li > a:active, a:visited, a:hover, a:link{
+	text-decoration: none;
+}
+
+.jh_fisheye_menu > li label{
+	display: block;
+	visibility: hidden;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 70%;
+}
