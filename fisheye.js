@@ -71,8 +71,8 @@ if(typeof(getCookie) === 'undefined'){
  * JH_Fisheye helper object containing static variables and functions
  */
 var JH_Fisheye_Statics = {
-	MIN_MENU_ICON_SIZE: 48,    // Minimum Icon Size, i.e. image size in non-magnified state
-	MAX_MENU_ICON_SIZE: 80,    // Maximum Icon Size, i.e. image size in magnified state
+	MIN_MENU_ICON_SIZE: 48,    // Minimum Icon Size (in px), i.e. image size in non-magnified state
+	MAX_MENU_ICON_SIZE: 80,    // Maximum Icon Size (in px), i.e. image size in magnified state
 	MENU_CLASS_NAME: 'jh_fisheye_menu',    // JH Fisheye class name, i.e. class of the fisheye-<ul> 
 	VERTICAL_MENU_CLASS_NAME: 'jh_fisheye_menu_vertical',  // JH Fisheye class name for vertical fisheye menus
 	COOKIE_KEY_ACTIVE: 'jh_fisheye_menu_active_item',  // Name of the cookie containing the active item index
@@ -98,9 +98,12 @@ var JH_Fisheye_Statics = {
  * @param {<ul>} rootULElement the HTML-<ul>-Element this JH_Fisheye works on
  * @param {<img>} activeElement the HTML-<img>-Element to be active by default when this JH_Fisheye is initialized.[optional]
  */
-JH_Fisheye = function(rootULElement, activeElement){
+JH_Fisheye = function(rootULElement, activeElement, wantGutter){
 	if(rootULElement.getAttribute("JH_Fisheye_Initialized") !== null && rootULElement.getAttribute("JH_Fisheye_Initialized") !== undefined){
 		return;
+	}
+	if(wantGutter === 'undefined'){
+	    wantGutter = true;
 	}
 	this.menuItemIcons = [];
 	this.menuItemSizes = [];
@@ -289,27 +292,29 @@ JH_Fisheye = function(rootULElement, activeElement){
 		this.renderMouseMove(offset, target);
 		this.updateInProgress = false;
 	};
-	// create gutter elements
-	var gutterElementStart = document.createElement("li");
-	var gutterImageStart = document.createElement("img");
-	var gutterLabelStart = document.createElement('label');
-	gutterElementStart.className = 'jh_fisheye_gutter';
-	gutterLabelStart.innerHTML = 'gutter';
-	gutterImageStart.setAttribute("src", "/img/fisheye_gutter.png");
-	gutterImageStart.setAttribute("gutter", "true");
-	gutterElementStart.appendChild(gutterImageStart);
-	gutterElementStart.appendChild(gutterLabelStart);
-	var gutterElementEnd = document.createElement("li");
-	var gutterImageEnd = document.createElement("img");
-	var gutterLabelEnd = document.createElement('label');
-	gutterLabelEnd.innerHTML = 'gutter';
-	gutterElementEnd.className = 'jh_fisheye_gutter';
-	gutterImageEnd.setAttribute("src", "/img/fisheye_gutter.png");
-	gutterImageEnd.setAttribute("gutter", "true");
-	gutterElementEnd.appendChild(gutterImageEnd);
-	gutterElementEnd.appendChild(gutterLabelEnd);
-	this.rootUL.insertBefore(gutterElementStart, rootULElement.firstChild);
-	this.rootUL.appendChild(gutterElementEnd);
+	if(wantGutter){
+    	// create gutter elements
+    	var gutterElementStart = document.createElement("li");
+    	var gutterImageStart = document.createElement("img");
+    	var gutterLabelStart = document.createElement('label');
+    	gutterElementStart.className = 'jh_fisheye_gutter';
+    	gutterLabelStart.innerHTML = 'gutter';
+    	gutterImageStart.setAttribute("src", "/img/fisheye_gutter.png");
+    	gutterImageStart.setAttribute("gutter", "true");
+    	gutterElementStart.appendChild(gutterImageStart);
+    	gutterElementStart.appendChild(gutterLabelStart);
+    	var gutterElementEnd = document.createElement("li");
+    	var gutterImageEnd = document.createElement("img");
+    	var gutterLabelEnd = document.createElement('label');
+    	gutterLabelEnd.innerHTML = 'gutter';
+    	gutterElementEnd.className = 'jh_fisheye_gutter';
+    	gutterImageEnd.setAttribute("src", "/img/fisheye_gutter.png");
+    	gutterImageEnd.setAttribute("gutter", "true");
+    	gutterElementEnd.appendChild(gutterImageEnd);
+    	gutterElementEnd.appendChild(gutterLabelEnd);
+    	this.rootUL.insertBefore(gutterElementStart, rootULElement.firstChild);
+    	this.rootUL.appendChild(gutterElementEnd);
+	}
 	// gather menu items
 	var listItems = this.rootUL.getElementsByTagName('li');
 	var icon;
