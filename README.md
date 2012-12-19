@@ -50,7 +50,7 @@ The JH_Fisheye can be initialized with a number of options:
 
 <script>
 	// this will create a vertical fisheye menu, where the item 'iWantThisToBeActive' is active by default and there are no gutter-elements.
-	var myFisheye = new JH_Fisheye(document.getElementById('myFisheye'), document.getElementById('iWantThisToBeActive'), false);
+	var myFisheye = new JH_Fisheye(document.getElementById('myVerticalFisheye'), document.getElementById('iWantThisToBeActive'), false);
 </script>
 ```
 
